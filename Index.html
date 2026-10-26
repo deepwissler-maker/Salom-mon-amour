@@ -1,103 +1,69 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 Mois d'Amour avec Toi 💕</title>
+    <title>1 Mois Avec Toi 💕</title>
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+    <!-- Polices Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <!-- Canvas Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
-    <!-- FontAwesome for Cute Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        roseGold: '#B76E79',
-                        blushPink: '#FFD1DC',
-                        softPink: '#FFF0F5',
-                        warmGold: '#D4AF37',
-                        magicLavender: '#E6E6FA',
-                        peachCream: '#FFF5EE'
-                    },
-                    fontFamily: {
-                        cursive: ['"Great Vibes"', 'cursive'],
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Poppins"', 'sans-serif'],
-                    },
-                    animation: {
-                        'float-slow': 'float 6s ease-in-out infinite',
-                        'float-medium': 'float 4s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 2.5s infinite alternate',
-                        'sparkle-spin': 'spin 8s linear infinite',
-                        'morph-blob': 'morphBlob 12s ease-in-out infinite alternate',
-                        'shimmer': 'shimmer 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-15px) rotate(3deg)' },
-                        },
-                        pulseGlow: {
-                            '0%': { boxShadow: '0 0 15px rgba(255, 182, 193, 0.4), 0 0 30px rgba(212, 175, 55, 0.2)' },
-                            '100%': { boxShadow: '0 0 35px rgba(255, 182, 193, 0.8), 0 0 50px rgba(212, 175, 55, 0.5)' }
-                        },
-                        morphBlob: {
-                            '0%': { borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%' },
-                            '50%': { borderRadius: '30% 60% 70% 40%/50% 60% 30% 60%' },
-                            '100%': { borderRadius: '70% 30% 50% 50%/30% 40% 60% 70%' }
-                        },
-                        shimmer: {
-                            '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
-                            '50%': { opacity: '1', transform: 'scale(1.03)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
     <style>
-        /* Styles personnalisés & curseur interactif */
+        /* ==========================================
+           VARIABLES CSS - COULEURS & THÈME
+           ========================================== */
+        :root {
+            --bg-gradient-1: #fff0f5;
+            --bg-gradient-2: #ffd1dc;
+            --bg-gradient-3: #ffe4e1;
+            --primary-pink: #ff6b8b;
+            --soft-pink: #ffb6c1;
+            --deep-rose: #d87093;
+            --accent-gold: #d4af37;
+            --gold-light: #fef1d2;
+            --text-color: #5c3a41;
+            --text-light: #8b5a65;
+            --white-glass: rgba(255, 255, 255, 0.7);
+            --card-shadow: 0 20px 40px rgba(216, 112, 147, 0.15);
+            --font-title: 'Playfair Display', serif;
+            --font-script: 'Great Vibes', cursive;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        /* RESET & BASE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #FFF5EE;
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             overflow-x: hidden;
-            font-family: 'Poppins', sans-serif;
-            cursor: default;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* Particules de traînée du curseur */
-        .sparkle-trail {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 14px;
-            animation: fadeAndRise 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        @keyframes fadeAndRise {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(calc(var(--vx) * 30px), calc(var(--vy) * 30px - 40px)) scale(0.2) rotate(180deg);
-            }
-        }
-
-        /* Arrière-plan particules interactives */
+        /* ARRIÈRE-PLAN ANIMÉ (BLOBS & PARTICULES) */
         #particleCanvas {
             position: fixed;
             top: 0;
@@ -108,408 +74,709 @@
             z-index: 1;
         }
 
-        /* Cadre Doré Romantique avec reflets */
-        .golden-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 20px 50px rgba(183, 110, 121, 0.15), inset 0 0 25px rgba(255, 209, 220, 0.3);
+        .blob-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        /* Animation d'apparition graduelle au scroll */
-        .reveal-on-scroll {
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: floatBlob 20s infinite alternate ease-in-out;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: #ffb6c1;
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #ffe4e1;
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #f3d1f4;
+            top: 40%;
+            left: 60%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 80px) scale(1.15); }
+            100% { transform: translate(-40px, -50px) scale(0.9); }
+        }
+
+        /* TAMPON / CURSEUR INTERACTIF */
+        .magic-sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: sparkleFade 1s forwards ease-out;
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        @keyframes sparkleFade {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(-50%, -100px) scale(1.4) rotate(180deg); opacity: 0; }
+        }
+
+        /* CONTENEUR PRINCIPAL */
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* COMPOSANTS DÉCORATIFS SVG */
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .gold-line {
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+
+        .gold-heart {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* 1. HERO SECTION */
+        .hero-section {
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        .hero-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 60px 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--card-shadow);
+            max-width: 650px;
+            width: 100%;
+            transform: translateY(0);
+            animation: floatHero 6s ease-in-out infinite;
+        }
+
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .badge-cute {
+            display: inline-block;
+            background: rgba(255, 107, 139, 0.15);
+            color: var(--primary-pink);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 107, 139, 0.3);
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--text-color);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-title span {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-script);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--deep-rose);
+            margin-top: 5px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 0.8;
+        }
+
+        .arrow-down {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-pink);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* 2. SECTION CARTE / ÉMOTIONS */
+        .emotions-section {
+            min-height: auto;
+            padding: 100px 20px;
+        }
+
+        .section-title-small {
+            font-family: var(--font-script);
+            font-size: 2.5rem;
+            color: var(--deep-rose);
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--text-color);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .emotion-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            padding: 40px 25px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            cursor: default;
+        }
+
+        .emotion-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 50px rgba(216, 112, 147, 0.25);
+            border-color: var(--soft-pink);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 5px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .emotion-card:hover .card-icon {
+            transform: scale(1.2) rotate(8deg);
+        }
+
+        .card-word {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* 3. CITATION CENTRALE */
+        .quote-section {
+            position: relative;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 240, 245, 0.85));
+            backdrop-filter: blur(15px);
+            padding: 70px 40px;
+            border-radius: 35px;
+            border: 2px solid var(--gold-light);
+            box-shadow: var(--card-shadow), inset 0 0 20px rgba(212, 175, 55, 0.1);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        .quote-box::before, .quote-box::after {
+            content: '✨';
+            position: absolute;
+            font-size: 1.8rem;
+        }
+
+        .quote-box::before { top: 20px; left: 25px; }
+        .quote-box::after { bottom: 20px; right: 25px; }
+
+        .quote-text {
+            font-family: var(--font-script);
+            font-size: clamp(2.3rem, 5vw, 3.8rem);
+            color: var(--deep-rose);
+            line-height: 1.3;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+        }
+
+        /* 4. MESSAGE SIGNÉ */
+        .message-section {
+            min-height: auto;
+            padding: 80px 20px 120px 20px;
+        }
+
+        .message-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--card-shadow);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .signature {
+            font-family: var(--font-script);
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        /* 5. FOOTER */
+        footer {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .footer-date {
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* BOUTONS FLOATTANTS DE COMMANDE */
+        .floating-controls {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .btn-float {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white-glass);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            outline: none;
+            color: var(--primary-pink);
+        }
+
+        .btn-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            background: #ffffff;
+            box-shadow: 0 12px 25px rgba(216, 112, 147, 0.3);
+        }
+
+        /* ANIMATIONS AU SCROLL (FADE IN) */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.8s ease-out;
         }
 
-        .reveal-on-scroll.visible {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 600px) {
+            section {
+                padding: 60px 15px;
+            }
+
+            .hero-card {
+                padding: 40px 20px;
+            }
+
+            .quote-box {
+                padding: 45px 20px;
+            }
+
+            .message-card {
+                padding: 35px 20px;
+            }
+
+            .floating-controls {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .btn-float {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
-<body class="text-gray-800 antialiased selection:bg-roseGold selection:text-white relative min-h-screen">
+<body>
 
-    <!-- CANVAS POUR LES PARTICULES FLOTTANTES (Cœurs, étoiles, bulles de lumière) -->
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- BLOBS ORGANILQUES EN ARRIÈRE-PLAN ANIMÉS (Effet féérique & pastel) -->
-    <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-gradient-to-tr from-blushPink/40 to-magicLavender/50 animate-morph-blob blur-3xl pointer-events-none z-0"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] bg-gradient-to-br from-peachCream/60 via-blushPink/30 to-roseGold/20 animate-morph-blob blur-3xl pointer-events-none z-0" style="animation-delay: -6s;"></div>
-
-    <!-- BOUTON MUSIQUE MAGIQUE EN HAUT À DROITE -->
-    <div class="fixed top-5 right-5 z-50">
-        <button id="musicBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-roseGold/30 text-roseGold text-xs sm:text-sm font-medium shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 group">
-            <i id="musicIcon" class="fa-solid fa-music text-roseGold group-hover:rotate-12 transition-transform"></i>
-            <span id="musicText">Activer la mélodie ✨</span>
-        </button>
+    <!-- BLOBS ORGANICS EN ARRIÈRE-PLAN -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <!-- MAIN CONTAINER -->
-    <main class="relative z-10 flex flex-col items-center justify-between min-h-screen px-4 py-8 sm:py-12 max-w-5xl mx-auto space-y-16 sm:space-y-24">
+    <!-- CANVAS PARTICULES & ÉTOILES -->
+    <canvas id="particleCanvas"></canvas>
 
-        <!-- HERO SECTION -->
-        <header class="w-full text-center pt-8 sm:pt-16 reveal-on-scroll visible">
-            <!-- Couronne ou ornement féérique -->
-            <div class="inline-flex items-center justify-center p-3 mb-4 rounded-full bg-white/60 border border-warmGold/30 shadow-sm animate-float-slow">
-                <span class="text-2xl sm:text-3xl">💖</span>
-            </div>
-            
-            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-800 mb-3 drop-shadow-sm">
-                1 mois <span class="bg-gradient-to-r from-roseGold via-pink-500 to-warmGold bg-clip-text text-transparent italic font-cursive text-5xl sm:text-7xl md:text-8xl">avec toi</span>
-            </h1>
-            
-            <p class="font-sans text-base sm:text-xl text-roseGold/90 font-light tracking-wide max-w-lg mx-auto">
-                ... et ce n'est que le début d'une merveilleuse histoire ✨
-            </p>
+    <!-- CONTENU PRINCIPAL -->
+    <main>
 
-            <!-- Petite flèche douce d'invitation -->
-            <div class="mt-8 sm:mt-12 animate-bounce">
-                <i class="fa-solid fa-angle-down text-roseGold/50 text-xl"></i>
-            </div>
-        </header>
-
-        <!-- SECTION 1 : LES TROIS PETITS BONHEURS -->
-        <section class="w-full reveal-on-scroll">
-            <h2 class="text-center font-serif italic text-2xl sm:text-3xl text-gray-700 mb-8 sm:mb-12">
-                Trois petits bonheurs quotidiens
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-2">
+        <!-- 1. HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="hero-card reveal active">
+                <span class="badge-cute">✨ 1er Mois d'Amour ✨</span>
+                <h1 class="hero-title">1 mois avec <span>toi 💕</span></h1>
+                <p class="hero-subtitle">et ce n'est que le début...</p>
                 
-                <!-- Badge 1 -->
-                <div class="golden-card rounded-3xl p-6 sm:p-8 text-center transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 group cursor-pointer animate-float-slow" style="animation-delay: 0s;">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-blushPink to-softPink flex items-center justify-center text-2xl text-roseGold shadow-inner group-hover:rotate-12 transition-transform">
-                        ✨
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-gray-800 mb-2">Nos fous rires</h3>
-                    <p class="text-sm text-gray-600 font-light leading-relaxed">
-                        Chaque éclat de rire partagé rend mes journées mille fois plus belles et lumineuses.
-                    </p>
+                <div class="gold-divider">
+                    <div class="gold-line"></div>
+                    <span class="gold-heart">♥</span>
+                    <div class="gold-line"></div>
                 </div>
-
-                <!-- Badge 2 -->
-                <div class="golden-card rounded-3xl p-6 sm:p-8 text-center transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 group cursor-pointer animate-float-slow" style="animation-delay: 1.5s;">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-blushPink to-softPink flex items-center justify-center text-2xl text-roseGold shadow-inner group-hover:scale-110 transition-transform">
-                        🌸
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-gray-800 mb-2">Tes doux câlins</h3>
-                    <p class="text-sm text-gray-600 font-light leading-relaxed">
-                        Le meilleur endroit du monde se trouve sans hésiter tout contre toi, au chaud.
-                    </p>
-                </div>
-
-                <!-- Badge 3 -->
-                <div class="golden-card rounded-3xl p-6 sm:p-8 text-center transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 group cursor-pointer animate-float-slow" style="animation-delay: 3s;">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-blushPink to-softPink flex items-center justify-center text-2xl text-roseGold shadow-inner group-hover:-rotate-12 transition-transform">
-                        ∞
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-gray-800 mb-2">Notre complicité</h3>
-                    <p class="text-sm text-gray-600 font-light leading-relaxed">
-                        Cette connexion naturelle et unique qu'on crée un peu plus chaque seconde.
-                    </p>
-                </div>
-
             </div>
+
+            <a href="#emotions" class="scroll-indicator" aria-label="Découvrir la suite">
+                <span>Glisse vers le bas</span>
+                <svg class="arrow-down" viewBox="0 0 24 24">
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+                </svg>
+            </a>
         </section>
 
-        <!-- SECTION CENTRALE : LA PHRASE ROMANTIQUE SUBLIMÉE -->
-        <section class="w-full max-w-3xl reveal-on-scroll">
-            <div class="golden-card animate-pulse-glow rounded-3xl sm:rounded-[2.5rem] p-8 sm:p-14 text-center relative overflow-hidden">
-                <!-- Swirl Ornaments SVG (Coin supérieur gauche) -->
-                <svg class="absolute top-3 left-3 w-12 h-12 text-warmGold/40 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z" />
-                    <circle cx="20" cy="20" r="5" />
-                </svg>
-                
-                <!-- Swirl Ornaments SVG (Coin inférieur droit) -->
-                <svg class="absolute bottom-3 right-3 w-12 h-12 text-warmGold/40 pointer-events-none rotate-180" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z" />
-                    <circle cx="20" cy="20" r="5" />
-                </svg>
+        <!-- 2. SECTION UN MOIS, MILLE ÉMOTIONS -->
+        <section class="emotions-section" id="emotions">
+            <span class="section-title-small reveal">Un mois avec toi...</span>
+            <h2 class="section-title reveal">Trois Douceurs ✨</h2>
 
-                <div class="relative z-10 space-y-4">
-                    <span class="text-warmGold text-xs uppercase tracking-widest font-semibold block">Pensée du cœur</span>
-                    
-                    <!-- Phrase principale retravaillée et mise en valeur -->
-                    <p class="font-cursive text-3xl sm:text-5xl md:text-6xl text-roseGold leading-relaxed px-2 py-4">
-                        « On n'était pas censés se croiser... et pourtant, aujourd'hui, tu es ma plus belle évidence. »
-                    </p>
+            <div class="cards-grid">
+                <!-- Carte 1 -->
+                <div class="emotion-card reveal">
+                    <span class="card-icon">✨</span>
+                    <span class="card-word">Complicité</span>
+                </div>
 
-                    <div class="flex items-center justify-center gap-2 text-warmGold pt-2">
-                        <span>✨</span>
-                        <span class="text-xl">💖</span>
-                        <span>✨</span>
-                    </div>
+                <!-- Carte 2 -->
+                <div class="emotion-card reveal">
+                    <span class="card-icon">🌸</span>
+                    <span class="card-word">Douceur</span>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="emotion-card reveal">
+                    <span class="card-icon">♾️</span>
+                    <span class="card-word">Bonheur Infini</span>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION MESSAGE DE DOUCEUR -->
-        <section class="w-full max-w-2xl text-center space-y-6 reveal-on-scroll">
-            <div class="bg-white/50 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-blushPink/50 shadow-sm space-y-4">
-                <p class="text-base sm:text-lg text-gray-700 leading-relaxed font-light">
-                    Toi et moi, le hasard a fait des merveilles. Merci d'être là, d'illuminer mes jours et de faire sourire mon cœur depuis un mois. 💕
+        <!-- 3. PHRASE D'AMOUR CENTRALE -->
+        <section class="quote-section" id="quote">
+            <div class="quote-box reveal">
+                <div class="gold-divider" style="margin: 0 auto 15px auto;">
+                    <div class="gold-line"></div>
+                    <span class="gold-heart">🌸</span>
+                    <div class="gold-line"></div>
+                </div>
+
+                <!-- PHRASE DE REFORMULATION UNIQUE -->
+                <p class="quote-text">
+                    "On n'était pas censés se croiser... et pourtant, aujourd'hui, tu es ma plus belle évidence. 💖"
                 </p>
-                <div class="pt-4">
-                    <p class="font-cursive text-3xl text-roseGold font-bold">
-                        Avec tout mon amour, pour toujours 💕
-                    </p>
+
+                <div class="gold-divider" style="margin: 15px auto 0 auto;">
+                    <div class="gold-line"></div>
+                    <span class="gold-heart">✨</span>
+                    <div class="gold-line"></div>
                 </div>
             </div>
         </section>
 
-        <!-- FOOTER & BOUTON INTERACTIF -->
-        <footer class="w-full text-center pb-8 space-y-6 reveal-on-scroll">
-            <div>
-                <!-- Bouton Pluie de cœurs -->
-                <button id="heartRainBtn" class="relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-roseGold via-pink-400 to-warmGold text-white font-medium text-base sm:text-lg shadow-xl hover:shadow-2xl hover:scale-108 active:scale-95 transition-all duration-300 group overflow-hidden">
-                    <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-                    <i class="fa-solid fa-heart animate-bounce"></i>
-                    <span class="relative z-10">Plein de cœurs ! 💕</span>
-                    <i class="fa-solid fa-sparkles"></i>
-                </button>
+        <!-- 4. PETIT MESSAGE SIGNÉ -->
+        <section class="message-section" id="message">
+            <div class="message-card reveal">
+                <p class="message-text">
+                    Merci pour ce tout premier mois rempli de rires, de câlins et de beaux moments. 
+                    Chaque jour à tes côtés est un cadeau. J'ai tellement hâte d'écrire toute la suite avec toi...
+                </p>
+                <div class="signature">Pour toujours, moi 💕</div>
             </div>
-
-            <p class="text-xs sm:text-sm text-gray-500 font-light">
-                Fait avec tout mon cœur ❤️ • 1 mois d'amour
-            </p>
-        </footer>
+        </section>
 
     </main>
 
-    <!-- LOGIQUE JAVASCRIPT ET ANIMATIONS -->
+    <!-- 5. FOOTER MINIMAL -->
+    <footer>
+        <p class="footer-text">Fait avec <span style="color: var(--primary-pink);">❤️</span> pour toi</p>
+        <p class="footer-date">Depuis le jour J — 1 Mois d'Amour 💖</p>
+    </footer>
+
+    <!-- BOUTONS INTERACTIFS FLOATTANTS -->
+    <div class="floating-controls">
+        <!-- Bouton Relancer Confettis -->
+        <button class="btn-float" id="confettiBtn" title="Pluie de cœurs !">💕</button>
+        <!-- Bouton Musique d'ambiance -->
+        <button class="btn-float" id="musicBtn" title="Activer/Désactiver la douce musique">🎵</button>
+    </div>
+
+    <!-- SCRIPTS JAVASCRIPT -->
     <script>
-        /* ======================================================
-         1. PARTICULES DE FOND (CANVAS) - Cœurs, étoiles & bulles
-        ====================================================== */
+        /* ==========================================
+           1. EFFET CONFETTIS DE CŒURS AU CHARGEMENT
+           ========================================== */
+        function triggerHeartConfetti() {
+            if (typeof confetti === 'function') {
+                // Salve 1
+                confetti({
+                    particleCount: 40,
+                    spread: 60,
+                    origin: { y: 0.7 },
+                    colors: ['#ff6b8b', '#ffb6c1', '#ffd1dc', '#d4af37'],
+                    shapes: ['circle']
+                });
+
+                // Confettis en forme de cœurs personnalisés si supporté
+                var scalar = 1.2;
+                var heart = confetti.shapeFromText({ text: '❤️', scalar });
+
+                confetti({
+                    particleCount: 25,
+                    scalar: scalar,
+                    shapes: [heart],
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        // Lancement au chargement de la page
+        window.addEventListener('load', () => {
+            setTimeout(triggerHeartConfetti, 500);
+        });
+
+        // Bouton interactif
+        document.getElementById('confettiBtn').addEventListener('click', triggerHeartConfetti);
+
+        /* ==========================================
+           2. ANIMATIONS AU SCROLL (INTERSECTION OBSERVER)
+           ========================================== */
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ==========================================
+           3. TRAÎNÉE MAGIQUE DE SOURIS (SPARKLES & HEARTS)
+           ========================================== */
+        const magicSymbols = ['✨', '💖', '🌸', '💕', '⭐'];
+        let lastSparkleTime = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastSparkleTime > 80) { // Limiter la fréquence
+                createMagicSparkle(e.clientX, e.clientY);
+                lastSparkleTime = now;
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            const now = Date.now();
+            if (now - lastSparkleTime > 80 && e.touches[0]) {
+                createMagicSparkle(e.touches[0].clientX, e.touches[0].clientY);
+                lastSparkleTime = now;
+            }
+        });
+
+        function createMagicSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'magic-sparkle';
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            sparkle.innerHTML = magicSymbols[Math.floor(Math.random() * magicSymbols.length)];
+            
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        /* ==========================================
+           4. CANVAS ARRIÈRE-PLAN : PARTICULES DE CŒURS
+           ========================================== */
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let particles = [];
+        const particleCount = 25;
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
 
-        const particles = [];
-        const particleCount = 45; // Densité douce
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        class FloatingParticle {
+        class FloatingHeart {
             constructor() {
                 this.reset();
             }
 
             reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height + height;
-                this.size = Math.random() * 12 + 6;
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 14 + 8;
                 this.speedY = Math.random() * 0.8 + 0.3;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.6 + 0.2;
-                this.type = Math.random() > 0.4 ? 'heart' : 'sparkle';
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.02;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.5;
+                this.color = ['#ff6b8b', '#ffb6c1', '#d4af37', '#e899ac'][Math.floor(Math.random() * 4)];
             }
 
             update() {
                 this.y -= this.speedY;
-                this.x += Math.sin(this.y * 0.01) * this.speedX;
-                this.rotation += this.rotSpeed;
+                this.x += Math.sin(this.y * 0.01) * 0.5;
+                this.rotation += this.rotationSpeed;
 
-                if (this.y < -30) {
+                if (this.y < -50) {
                     this.reset();
-                    this.y = height + 20;
                 }
             }
 
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
+                ctx.rotate((this.rotation * Math.PI) / 180);
                 ctx.globalAlpha = this.opacity;
-
-                if (this.type === 'heart') {
-                    ctx.fillStyle = '#FFB6C1';
-                    ctx.beginPath();
-                    const topCurveHeight = this.size * 0.3;
-                    ctx.moveTo(0, topCurveHeight);
-                    ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
-                    ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
-                    ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
-                    ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
-                    ctx.fill();
-                } else {
-                    // Étoile / Sparkle
-                    ctx.fillStyle = '#D4AF37';
-                    ctx.beginPath();
-                    for (let i = 0; i < 4; i++) {
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2) * this.size, Math.sin((i * Math.PI) / 2) * this.size);
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * (this.size / 3), Math.sin((i * Math.PI) / 2 + Math.PI / 4) * (this.size / 3));
-                    }
-                    ctx.fill();
-                }
-
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new FloatingParticle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-
-        /* ======================================================
-         2. EFFET DE TRAÎNÉE MAGIQUE DU CURSEUR (Sparkle Trail)
-        ====================================================== */
-        const trailSymbols = ['✨', '💖', '🌸', '⭐', '💕'];
-        let lastMove = 0;
-
-        function createSparkle(x, y) {
-            const now = Date.now();
-            if (now - lastMove < 40) return; // Évite la surcharge de particules
-            lastMove = now;
-
-            const sparkle = document.createElement('span');
-            sparkle.className = 'sparkle-trail';
-            sparkle.textContent = trailSymbols[Math.floor(Math.random() * trailSymbols.length)];
-            
-            // Calcul d'une direction aléatoire de dispersion
-            const vx = (Math.random() - 0.5) * 2;
-            const vy = (Math.random() - 0.5) * 2;
-            sparkle.style.setProperty('--vx', vx);
-            sparkle.style.setProperty('--vy', vy);
-
-            sparkle.style.left = `${x}px`;
-            sparkle.style.top = `${y}px`;
-
-            document.body.appendChild(sparkle);
-
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1200);
-        }
-
-        window.addEventListener('mousemove', (e) => createSparkle(e.clientX, e.clientY));
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches[0]) {
-                createSparkle(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        });
-
-        /* ======================================================
-         3. MUSIQUE AMBIANTE AVEC WEB AUDIO API (Carillon féérique)
-        ====================================================== */
-        let audioCtx = null;
-        let isPlaying = false;
-        let melodyInterval = null;
-
-        const musicBtn = document.getElementById('musicBtn');
-        const musicIcon = document.getElementById('musicIcon');
-        const musicText = document.getElementById('musicText');
-
-        // Arpège féérique doux (Notes pentatoniques douces)
-        const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; 
-
-        function playSoftNote() {
-            if (!isPlaying || !audioCtx) return;
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-
-            const randomFreq = notes[Math.floor(Math.random() * notes.length)];
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(randomFreq, audioCtx.currentTime);
-
-            // Enveloppe sonore douce (Bells / Carillon féérique)
-            gain.gain.setValueAtTime(0, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
-
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 2.6);
-        }
-
-        musicBtn.addEventListener('click', () => {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            isPlaying = !isPlaying;
-
-            if (isPlaying) {
-                musicText.textContent = "Mélodie activée 💖";
-                musicIcon.className = "fa-solid fa-heart text-pink-500 animate-pulse";
-                melodyInterval = setInterval(playSoftNote, 600);
-            } else {
-                musicText.textContent = "Activer la mélodie ✨";
-                musicIcon.className = "fa-solid fa-music text-roseGold";
-                clearInterval(melodyInterval);
-            }
-        });
-
-        /* ======================================================
-         4. CONFETTIS DE CŒURS FÉÉRIQUES
-        ====================================================== */
-        function triggerHeartConfetti() {
-            if (typeof confetti === 'function') {
-                // Pluie de cœurs à partir des coins
-                confetti({
-                    particleCount: 40,
-                    spread: 60,
-                    origin: { y: 0.8 },
-                    colors: ['#FFB6C1', '#FFD1DC', '#D4AF37', '#B76E79'],
-                    shapes: ['circle'],
-                    scalar: 1.2
-                });
-            }
-        }
-
-        document.getElementById('heartRainBtn').addEventListener('click', () => {
-            triggerHeartConfetti();
-        });
-
-        /* ======================================================
-         5. ANIMATION REVEAL ON SCROLL (Apparition fluide)
-        ====================================================== */
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-        /* ======================================================
-         LANCEMENT DES ANIMATIONS AU CHARGEMENT
-        ====================================================== */
-        window.onload = function() {
-            animateParticles();
-            // Lancement d'un doux confetti d'accueil après 1s
-            setTimeout(() => {
-                triggerHeartConfetti();
-            }, 1000);
-        };
-    </script>
-</body>
-</html>
+                ctx.fillStyle = this.color;
+                
+                // Dessin d'un cœur en chemin SVG sur Canvas
+                ctx.beginPath();
+                const topCurve
